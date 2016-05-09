@@ -183,9 +183,25 @@ hr.small {
 .callout {
     display: table;
     width: 100%;
-    height: 400px;
+    height: 250px;
     color: #fff;
     background: url(../img/callout.jpg) no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+/* cloudword */
+
+.cloudword {
+    display: table;
+    width: 100%;
+    height: 550px;
+    color: #fff;
+
+    background: url(../img/cloudword.png) no-repeat center center scroll;
+    vertical-align : middle;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
