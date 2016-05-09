@@ -119,6 +119,9 @@
                     <p class="lead">
                         <button id="submitButton" type="submit" class="btn btn-dark btn-lg">Find my match</button>
                         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">
+                        <div id ="cloudlinkDiv">
+                            <a href="#cloudword" id="cloudlink" ></a>
+                        <div>
                     </p>
                     </div>
                 </div>
@@ -198,7 +201,7 @@
             <h1>Redesigning Travel Plans</h1>
         </div>
     </aside>
-    <aside class="cloudword">
+    <aside class="cloudword" id="cloudword">
     </aside>
     <!-- Portfolio -->
     <section id="result" class="portfolio">
@@ -341,9 +344,12 @@
     $(document).ready(function() {
         $("#startDate").datepicker();
         $("#endDate").datepicker();
+
+        $("#cloudlinkDiv").hide();
     });
 
     $("#submitButton").click(function() {
+        $("#cloudlink").click();
         var postData = $(this).serializeArray();
         $("#icon").attr("src", "img/loading.gif");
 
@@ -395,7 +401,7 @@
                 jqXHR, textStatus, errorThrown) {
                 <!--$("#icon").attr("src", "img/logo-circle.png");
                 -->
-                alert(errorThrown)
+                alert(errorThrown);
             }
         });
         event.preventDefault();
