@@ -72,20 +72,23 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="form-group">
+                            <label for="location" class="control-label">Location:</label>
                             <div class='input-group'>
                                 <input type='text' class="form-control" id="location" placeholder="Location"></input>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker'>
+                            <label class="control-label">Date:</label>
+                            <div class='input-group date' id='startDate'>
                                 <input type='text' class="form-control" placeholder="YYYYMMDD" />
                                 <span class="input-group-addon">
                                  <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
                         </div>
+                        ~
                         <div class="form-group">
-                            <div class='input-group date' id='datetimepicker2'>
+                            <div class='input-group date' id='endDate'>
                                 <input type='text' class="form-control" placeholder="YYYYMMDD" />
                                 <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -104,17 +107,24 @@
                     </div>
                 </div>
             </form>
-
+            <div class="row" style="padding: 15px">
+                <div class="col-lg-12 text-center">
+                    <textarea name="input" class="form-control" cols="60" rows="3">
+                        關原之戰東軍除了德川家康及其家臣外，還有許多原是豐臣秀吉的家臣（如福島正則）。原因是因為厭惡石田三成而參加東軍，絕大多數的原因分為以下幾種： 石田三成的對人態度 石田三成對人態度是很兩極化的，如在萬曆朝鮮戰爭中，三成目睹加藤清正與福島正則虐殺手無縛雞之力的朝鮮人的畫面，原本就與該兩人處的不是很好，經過此事件更是雪上加霜。 豐臣秀吉對朝鮮的征伐態度 自豐臣秀吉發現朝鮮國王並無臣服意願時，渡海助陣的意願便降低許多，但秀吉表面上仍表明說他要去，可是到最後幾乎都還是沒去，而在朝鮮的部隊依舊在奮戰，此情況重演了好幾遍，自然而然前線許多部隊就誤以為這是豐臣秀吉委任在朝鮮指揮的石田三成、寺澤廣高等奉行的意思(即為不讓秀吉來朝鮮，因為總大將參戰與否會影響到整個軍團士氣)，因而成為許多武將的敵視對象。 朝鮮之役的賞罰問題 石田三成是由武將在戰場上的表現來決定獎賞(秀吉委任奉行至朝鮮監督)，可是因為之前豐臣秀吉渡海問題已造成多名武將敵視，便有些人對三成給自己的獎賞感到不滿，也有立下戰功但不從軍令而被三成扣賞的人(如小早川秀秋)，也同樣敵視三成。 豐臣秀次的相關事件 由於石田三成負責調查豐臣秀次的罪行，調查中有意無意牽連了一些平日對立的權勢大名家，如淺野長政、細川忠興、最上氏、伊達氏、黑田氏和小早川氏。小早川秀秋更是因為秀次事件受到牽連而被沒收丹波龜山十萬石領地。除此之外，有人認為是三成與豐臣秀吉聯手為了豐臣秀賴的未來鋪路而找理由處理掉秀次（事實上三成一直在找證據幫秀次脫困），導致關原時期三成對秀秋開出戰勝家康可在秀賴成人前當關白的條件時，讓秀秋擔心當上關白總有一天也會被三成處理掉的陰影，再加上朝鮮事件，秀秋在關原之戰會背叛到東軍的理由就很充足了。
+                    </textarea>
+                </div>
+            </div>
             <div class="row" style="padding: 15px">
                 <div class="col-lg-12 text-center">
                     <p class="lead">
-                        <a href="#about" class="btn btn-dark btn-lg">Find my match</a>
+                        <button id="submitButton" type="submit" class="btn btn-dark btn-lg">Find my match</button>
+                        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">
                     </p>
+                    </div>
                 </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
+            <!-- /.container -->
     </section>
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
@@ -191,6 +201,9 @@
     <aside class="cloudword">
     </aside>
     <!-- Portfolio -->
+    <section id="result" class="portfolio">
+        <div id="chartdiv"></div>
+    </section>
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
@@ -291,6 +304,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="js/index.js"></script>
     <!-- Custom Theme JavaScript -->
     <script>
     // Closes the sidebar menu
@@ -322,8 +339,66 @@
         });
     });
     $(document).ready(function() {
-        $("#datetimepicker").datepicker();
-        $("#datetimepicker2").datepicker();
+        $("#startDate").datepicker();
+        $("#endDate").datepicker();
+    });
+
+    $("#submitButton").click(function() {
+        var postData = $(this).serializeArray();
+        $("#icon").attr("src", "img/loading.gif");
+
+        $.ajax({
+            url: "http://wtp.mybluemix.net/rest/text/recongnize",
+            //url : "#",
+            type: "POST",
+            data: postData,
+            success: function(data, textStatus, jqXHR) {
+                $("#icon").attr("src", "images/logo-circle.png");
+
+                var chart = AmCharts.makeChart("chartdiv", {
+                    "type": "serial",
+                    "theme": "light",
+                    "dataProvider": data.personalities,
+                    "valueAxes": [{
+                        "gridColor": "#FFFFFF",
+                        "gridAlpha": 0.2,
+                        "dashLength": 0
+                    }],
+                    "gridAboveGraphs": true,
+                    "startDuration": 1,
+                    "graphs": [{
+                        "balloonText": "[[category]]: <b>[[value]]</b>",
+                        "fillAlphas": 0.8,
+                        "lineAlpha": 0.2,
+                        "type": "column",
+                        "valueField": "percentage"
+                    }],
+                    "chartCursor": {
+                        "categoryBalloonEnabled": false,
+                        "cursorAlpha": 0,
+                        "zoomable": false
+                    },
+                    "categoryField": "chi",
+                    "categoryAxis": {
+                        "gridPosition": "start",
+                        "gridAlpha": 0,
+                        "tickPosition": "start",
+                        "tickLength": 20
+                    },
+                    "export": {
+                        "enabled": true
+                    }
+
+                });
+            },
+            error: function(
+                jqXHR, textStatus, errorThrown) {
+                <!--$("#icon").attr("src", "img/logo-circle.png");
+                -->
+                alert(errorThrown)
+            }
+        });
+        event.preventDefault();
     });
     </script>
 </body>
