@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Stylish Portfolio - Start Travel Agency Theme</title>
+    <title>Travel Concept Advisory</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -31,7 +31,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top" onclick=$ ( "#menu-close").click();>Start Travel Advisior</a>
+                <a href="#top" onclick=$ ( "#menu-close").click();>Travel Advisior</a>
             </li>
             <li>
                 <a href="#top" onclick=$ ( "#menu-close").click();>Home</a>
@@ -53,8 +53,8 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1>Start Travel</h1>
-            <h3>Free Bootstrap Themes &amp; Templates</h3>
+            <h1>Travel Concept Advisory</h1>
+            <h3>Surprising your travle plans</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
         </div>
@@ -64,7 +64,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+                    <h2>Our Advisory is the perfect selection for your journey</h2>
                 </div>
             </div>
             <!-- /.row -->
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <label class="control-label">Date:</label>
                             <div class='input-group date' id='startDate'>
-                                <input type='text' class="form-control" placeholder="YYYYMMDD" />
+                                <input type='text' class="form-control" placeholder="YYYY/MM/DD" />
                                 <span class="input-group-addon">
                                  <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -89,7 +89,7 @@
                         ~
                         <div class="form-group">
                             <div class='input-group date' id='endDate'>
-                                <input type='text' class="form-control" placeholder="YYYYMMDD" />
+                                <input type='text' class="form-control" placeholder="YYYY/MM/DD" />
                                 <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -120,7 +120,7 @@
                         <button id="submitButton" type="submit" class="btn btn-dark btn-lg">Find my match</button>
                         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true">
                         <div id ="cloudlinkDiv">
-                            <a href="#cloudword" id="cloudlink" ></a>
+                            <a href="#callout" id="cloudlink" ></a>
                         <div>
                     </p>
                     </div>
@@ -196,7 +196,7 @@
         <!-- /.container -->
     </section>
     <!-- Callout -->
-    <aside class="callout">
+    <aside class="callout" id="callout" >
         <div class="text-vertical-center">
             <h1>Redesigning Travel Plans</h1>
         </div>
@@ -277,13 +277,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Start Travel Advisior</strong>
+                    <h4><strong>Best Travel Advisior</strong>
                     </h4>
-                    <p>3481 Melrose Place
-                        <br>Beverly Hills, CA 90210</p>
+                    <p>No. 7, Songren Rd, Xinyi District
+                        <br>Taipei City, Taiwan 110</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-phone fa-fw"></i> (02) 8723-8888</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:traveler@tw.ibm.com">traveler@tw.ibm.com</a>
                         </li>
                     </ul>
                     <br>
@@ -299,7 +299,7 @@
                         </li>
                     </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                    <p class="text-muted">Copyright &copy; IBM Watson Hackthon</p>
                 </div>
             </div>
         </div>
@@ -356,7 +356,7 @@
         $("#icon").attr("src", "img/loading.gif");
 
         $.ajax({
-            url: "http://wtp.mybluemix.net/rest/text/recongnize",
+            url: "rest/text/recongnize",
             //url : "#",
             type: "POST",
             data: postData,
@@ -403,7 +403,7 @@
                 jqXHR, textStatus, errorThrown) {
                 <!--$("#icon").attr("src", "img/logo-circle.png");
                 -->
-                alert(errorThrown);
+               <!-- alert(errorThrown);  -->
             }
         });
         event.preventDefault();
